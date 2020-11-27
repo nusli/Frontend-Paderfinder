@@ -1,0 +1,68 @@
+<div class="all">
+
+
+
+
+<ul>
+    
+    <mat-card  class="card">
+        <mat-card-header>
+        
+        <mat-card-title>Poste etwas!</mat-card-title>
+        <mat-card-subtitle>Informiere andere Stämme über Ereignisse bei euch.</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+            <div class="example-container">
+                <mat-form-field appearance="fill">
+                  <mat-label>Titel</mat-label>
+                  <input matInput>
+                </mat-form-field>
+                <br>
+                <mat-form-field appearance="fill">
+                  <mat-label>Art des Posts</mat-label>
+                  <mat-select>
+                    <mat-option value="news">News</mat-option>
+                    <mat-option value="event">Event</mat-option>
+                    <mat-option value="lager">Lager</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <br>
+                <mat-form-field appearance="fill">
+                  <mat-label>Inhalt des Posts</mat-label>
+                  <textarea matInput></textarea>
+                </mat-form-field>
+                <br>
+                <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
+                  <button mat-button (click)="fileInput.click()">Bild hinzufügen</button>
+
+              </div>
+              
+        </mat-card-content>
+        <mat-card-actions>
+        
+        <button mat-button>Post</button>
+        </mat-card-actions>
+    </mat-card>
+
+    <h1 style="padding-top: 30px;">Globaler Newsfeed</h1>
+ <li *ngFor="let content of data">
+    <mat-card  class="card">
+        <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>{{content.title}}</mat-card-title>
+        <mat-card-subtitle>{{content.user}}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src={{content.bild}} alt="Photo of a Shiba Inu">
+        <mat-card-content>
+        <p>{{content.content}}</p>
+        </mat-card-content>
+        <mat-card-actions>
+        <button mat-button>LIKE</button>
+        <button mat-button>SHARE</button>
+        </mat-card-actions>
+    </mat-card>
+  </li>
+</ul>
+
+</div>

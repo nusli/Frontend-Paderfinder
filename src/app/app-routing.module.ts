@@ -1,11 +1,34 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { HomeComponent } from './home/home.component';    //1
 
-const routes: Routes = [];
+import { StammComponent } from './stamm/stamm.component';    //1
+import { LoginComponent } from './login/login.component'; 
+import { RegisterComponent} from './register/register.component'
+import { ImpressumComponent } from './impressum/impressum.component';
+import { PoliciesComponent } from './policies/policies.component';
+import { AboutComponent } from './about/about.component';
+import { ChangeStammComponent } from './change-stamm/change-stamm.component';
+import { SucheComponent } from './suche/suche.component';
+
+
+const routes: Routes = [
+  { path: '', component: HomeComponent },                 //2  
+  { path: 'stamm', component: StammComponent },  
+  { path: 'impressum', component: ImpressumComponent },  
+  { path: 'policies', component: PoliciesComponent },  
+  { path: 'about', component: AboutComponent },  
+  { path: 'login', component: LoginComponent },   
+  { path: 'register', component: RegisterComponent },        
+  { path: 'changeStamm', component: ChangeStammComponent },    
+  { path: 'suche', component: SucheComponent },  
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+
+ }

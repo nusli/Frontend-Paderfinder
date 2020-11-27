@@ -1,0 +1,72 @@
+<div class="all">
+<ul>
+  <lI>
+<mat-card class="login" *ngIf="!myVar">
+    <mat-card-title style="padding-bottom: 10px;" >Register</mat-card-title>
+
+    <mat-form-field appearance="fill" class="field">
+        <mat-label>Stammesname</mat-label>
+        <input matInput>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="field">
+        <mat-label>E-mail</mat-label>
+        <input matInput>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="field">
+        <mat-label>Stammesvorstand</mat-label>
+        <input matInput>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="field">
+        <mat-label>Adresse</mat-label>
+        <input matInput>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="field">
+        <mat-label>Enter your password</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="field">
+        <mat-label>Confirm Passwort</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'">
+      </mat-form-field>
+
+    <mat-card-actions> 
+        <button mat-button (click)="registerClicked()">Register</button>
+    </mat-card-actions>
+
+    <mat-card-footer>
+
+    </mat-card-footer>
+</mat-card>
+</lI>
+<br>
+
+<li>
+
+<mat-card class="login" id="popup" *ngIf="myVar"> 
+  <mat-card-title style="padding-bottom: 10px;">Registrierung abgeschlossen!</mat-card-title>
+
+  <mat-card-content>
+    <p>Die Registrierung deines Stammes-Accounts ist abgeschlossen. Sobald dein Account von einem Mitarbeiter verifiziert wurde, hast du Zugang zu allen Inhalten.
+    </p>
+  </mat-card-content>
+
+
+  <mat-card-actions> 
+      <a routerLink="/login"><button mat-button>Ok</button></a>
+  </mat-card-actions>
+
+  <mat-card-footer>
+
+  </mat-card-footer>
+</mat-card>
+</li>
+</ul>
+</div>
