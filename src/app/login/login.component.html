@@ -4,22 +4,22 @@
 
     <mat-form-field appearance="fill" class="field">
         <mat-label>Email</mat-label>
-        <input matInput>
+        <input matInput [(ngModel)]="benutzerName">
       </mat-form-field>
 
       <br>
 
       <mat-form-field appearance="fill" class="field">
         <mat-label>Enter your password</mat-label>
-        <input matInput [type]="hide ? 'password' : 'text'">
+        <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="passwort">
         <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
         </button>
       </mat-form-field>
 
     <mat-card-actions>
-        <a routerLink="/"><button mat-button>Submit</button></a>
-        <a routerLink="/register"><button mat-button>Register</button></a>
+        <a routerLink="/"><button mat-button (click)="submitLogin">Einloggen</button></a>
+        <a routerLink="/register"><button mat-button>Registrieren</button></a>
     </mat-card-actions>
 
     <mat-card-footer>

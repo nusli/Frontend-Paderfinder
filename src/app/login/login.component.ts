@@ -14,4 +14,11 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  benutzerName = "";
+  passwort = "";
+
+  submitLogin(): void {
+    // TODO
+  }
+
 }
