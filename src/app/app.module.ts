@@ -63,6 +63,8 @@ import { PoliciesComponent } from './policies/policies.component';
 import { ChangeStammComponent } from './change-stamm/change-stamm.component';
 import { SucheComponent } from './suche/suche.component';
 
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -127,7 +129,8 @@ import { SucheComponent } from './suche/suche.component';
     OverlayModule,
     PortalModule,
     ScrollingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

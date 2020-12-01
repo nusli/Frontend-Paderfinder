@@ -16,12 +16,12 @@
             <div class="example-container">
                 <mat-form-field appearance="fill">
                   <mat-label>Titel</mat-label>
-                  <input matInput>
+                  <input matInput [(ngModel)] = "titel">
                 </mat-form-field>
                 <br>
                 <mat-form-field appearance="fill">
                   <mat-label>Art des Posts</mat-label>
-                  <mat-select>
+                  <mat-select [(ngModel)] = "art">
                     <mat-option value="news">News</mat-option>
                     <mat-option value="event">Event</mat-option>
                     <mat-option value="lager">Lager</mat-option>
@@ -30,7 +30,7 @@
                 <br>
                 <mat-form-field appearance="fill">
                   <mat-label>Inhalt des Posts</mat-label>
-                  <textarea matInput></textarea>
+                  <textarea matInput [(ngModel)] = "inhalt"></textarea>
                 </mat-form-field>
                 <br>
                 <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
@@ -41,7 +41,7 @@
         </mat-card-content>
         <mat-card-actions>
         
-        <button mat-button>Post</button>
+        <button mat-button (click)="newPost()">Post</button>
         </mat-card-actions>
     </mat-card>
 
