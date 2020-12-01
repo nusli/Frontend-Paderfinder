@@ -65,6 +65,7 @@ export class HomeComponent implements OnInit {
         title: element.titel,
         typ: "News",
         publish_date : element.änderungsdatum,
+        //Hier muss das ausgewählte bild hin 
         bild: "https://pfadfinder-meschede.de/wp-content/uploads/2018/10/Schweden.jpg"
       }
       
@@ -77,6 +78,8 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
+  //FilePicker
   onFileChanged(event) {
     const file = event.target.files[0]
   }
