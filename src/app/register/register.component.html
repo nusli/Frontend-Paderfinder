@@ -6,27 +6,27 @@
 
     <mat-form-field appearance="fill" class="field">
         <mat-label>Stammesname</mat-label>
-        <input matInput>
+        <input matInput [(ngModel)]="name">
       </mat-form-field>
 
       <mat-form-field appearance="fill" class="field">
         <mat-label>E-mail</mat-label>
-        <input matInput>
+        <input matInput [(ngModel)]="email">
       </mat-form-field>
 
       <mat-form-field appearance="fill" class="field">
         <mat-label>Stammesvorstand</mat-label>
-        <input matInput>
+        <input matInput [(ngModel)]="vorstand">
       </mat-form-field>
 
       <mat-form-field appearance="fill" class="field">
         <mat-label>Adresse</mat-label>
-        <input matInput>
+        <input matInput [(ngModel)]="adresse">
       </mat-form-field>
 
       <mat-form-field appearance="fill" class="field">
         <mat-label>Enter your password</mat-label>
-        <input matInput [type]="hide ? 'password' : 'text'">
+        <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="passwort">
         <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
         </button>
@@ -34,7 +34,7 @@
 
       <mat-form-field appearance="fill" class="field">
         <mat-label>Confirm Passwort</mat-label>
-        <input matInput [type]="hide ? 'password' : 'text'">
+        <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="passwort_confirm">
       </mat-form-field>
 
     <mat-card-actions> 

@@ -3,7 +3,7 @@
     <mat-card-title style="padding-bottom: 10px;">Login</mat-card-title>
 
     <mat-form-field appearance="fill" class="field">
-        <mat-label>Email</mat-label>
+        <mat-label>Stammname</mat-label>
         <input matInput [(ngModel)]="benutzerName">
       </mat-form-field>
 
@@ -18,7 +18,7 @@
       </mat-form-field>
 
     <mat-card-actions>
-        <a routerLink="/"><button mat-button (click)="submitLogin">Einloggen</button></a>
+        <a routerLink="/"><button mat-button (click)="submitLogin()">Einloggen</button></a>
         <a routerLink="/register"><button mat-button>Registrieren</button></a>
     </mat-card-actions>
 
