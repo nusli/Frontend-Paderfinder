@@ -11,24 +11,7 @@ export class StammComponent implements OnInit {
 
 
 
-  data = [
-    {
-      user: "DPSG St. Josef Rentfort",
-      title: "Weihnachtsmarkt",
-      content: "Weihnachtsmarkt am 20.12.2020",
-      typ: "Event",
-      publish_date : "05.11.2020",
-      bild: "https://bilder.t-online.de/b/86/83/25/74/id_86832574/tid_da/weihnachtsmarkt-in-frankfurt-schon-seit-1393-ist-er-urkundlich-belegt-.jpg"
-    },
-    {
-      user: "DPSG Heilige Maria",
-      content: "Sommerlager findet nächstes Jahr am 06.06.2020 statt",
-      title: "Sommerlager",
-      typ: "Lager",
-      publish_date : "06.11.2020",
-      bild: "https://pfadfinder-meschede.de/wp-content/uploads/2018/10/Schweden.jpg"
-    }
-  ]
+  data = []
 
   stammesvorstand=""
   ort=""
@@ -40,6 +23,7 @@ export class StammComponent implements OnInit {
 
   constructor(private http: HttpClient) { 
     this.getInfo();
+    this.getPosts();
   }
 
   getInfo(){
@@ -63,4 +47,35 @@ export class StammComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  getPosts(){
+    //Hier muss Abfrage der Posts abhängig von der session-stammnummer
+    this.http.get('http://localhost:3000/posts').toPromise().then(
+
+      
+      data => {
+        this.addData(data)
+      }
+    );
+  }
+
+  addData(newdata){
+    this.data = [];
+     newdata.forEach(element => {
+      var post = {
+        //Hier jeweilig angemeldeten usernamen
+        user: "DPSG Heilige Maria",
+        content: element.inhalt,
+        title: element.titel,
+        typ: "News",
+        publish_date : element.änderungsdatum,
+        //Hier muss das ausgewählte bild hin 
+        bild: "https://pfadfinder-meschede.de/wp-content/uploads/2018/10/Schweden.jpg"
+      }
+      
+      this.data.push(post)
+      
+    });
+    this.data.reverse();
+  }
 }
+
