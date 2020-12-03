@@ -6,36 +6,50 @@
     <mat-form-field appearance="fill" class="field">
         
         <mat-label>Stammesname</mat-label>
-        <input value ="St.Josef" matInput> 
+        <input value ="St.Josef" matInput [(ngModel)]="stammesname"> 
       </mat-form-field>
 
       <mat-form-field appearance="fill" class="field">
         
         <mat-label>Email</mat-label>
-        <input value ="test@gmail.com" matInput> 
+        <input value ="test@gmail.com" matInput [(ngModel)]="email"> 
       </mat-form-field>
 
       <mat-form-field appearance="fill" class="field">
         
         <mat-label>Telefon</mat-label>
-        <input value ="0157 6666" matInput> 
+        <input value ="0157 6666" matInput [(ngModel)]="telefon"> 
+      </mat-form-field>
+
+ 
+
+      <mat-form-field appearance="fill" class="field">
+        
+        <mat-label>Ort</mat-label>
+        <input value ="Gladbeck" matInput [(ngModel)]="ort"> 
       </mat-form-field>
 
       <mat-form-field appearance="fill" class="field">
         
         <mat-label>Mitglieder</mat-label>
-        <input value ="1000" matInput> 
+        <input value ="Gladbeck" matInput [(ngModel)]="Mitglieder"> 
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="field">
+        
+        <mat-label>Stammesvorstand</mat-label>
+        <input value ="Gladbeck" matInput [(ngModel)]="stammesvorstand"> 
       </mat-form-field>
 
       <mat-form-field appearance="fill" class="field">
         
         <mat-label>Ort</mat-label>
-        <input value ="Gladbeck" matInput> 
+        <input value ="Beschreibung" matInput [(ngModel)]="beschreibung"> 
       </mat-form-field>
       <br>
 
     <mat-card-actions>
-        <button mat-button href="#" routerLink="/stamm">Änderungen Speichern</button>
+        <button mat-button href="#" routerLink="/stamm" (click)="sendChanges()">Änderungen Speichern</button>
     </mat-card-actions>
 
     <mat-card-footer>

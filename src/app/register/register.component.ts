@@ -55,6 +55,7 @@ export class RegisterComponent implements OnInit {
       .then( (response) => {
           // TODO
           // route to homepage
+          this.myVar = true;
           console.log(response)
       })
     }
