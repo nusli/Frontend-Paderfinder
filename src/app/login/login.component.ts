@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit {
      console.log("passwort nicht angegeben")
       return;
     } else {
+      
       // TODO get url dynamically
       fetch('http://localhost:3000/login', {
         method: "post",
@@ -39,16 +40,24 @@ export class LoginComponent implements OnInit {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
+        credentials: 'include',
         body: JSON.stringify({
           stammName: this.benutzerName,
           password: this.passwort
         })
+      }).then(response => {
+        
+        return response.text() 
       })
-      .then( (response) => {
-          // TODO
-          // route to homepage
-          console.log((response.body))
+      .then (data => {
+        console.log(document.cookie)
+        console.log(data)
       })
+      .catch((error) => {
+        console.error('Error:', error);
+      }); 
+
+    
     }
   }
 
