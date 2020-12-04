@@ -45,6 +45,7 @@ export class RegisterComponent implements OnInit {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
+        credentials: 'include',
         body: JSON.stringify({
           name: this.name,
           passwort: this.passwort,
@@ -56,8 +57,8 @@ export class RegisterComponent implements OnInit {
           // TODO
           // route to homepage
           this.myVar = true;
-          console.log(response)
-      })
+          return response.text();
+      }).then( data => console.log(data))
     }
 
    }
