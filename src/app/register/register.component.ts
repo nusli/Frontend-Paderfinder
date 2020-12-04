@@ -56,6 +56,11 @@ export class RegisterComponent implements OnInit {
       .then( (response) => {
           // TODO
           // route to homepage
+          if (response.status == 400) {
+            // something went wrong -> notify user
+            // E11000 --> doppelter stamm name
+            console.log("something went wrong")
+          }
           this.myVar = true;
           return response.text();
       }).then( data => console.log(data))
