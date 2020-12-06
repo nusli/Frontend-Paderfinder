@@ -75,6 +75,9 @@ export class HomeComponent implements OnInit {
     this.http.post('http://localhost:3000/posts',postData).toPromise().then(
       data => console.log(postData)
     ).then(data => this.getPosts())
+    .catch(err => {
+      return console.log(postData);
+    })
     
   }
   
