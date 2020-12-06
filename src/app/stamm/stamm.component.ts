@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { ThrowStmt } from '@angular/compiler';
+import {DataService} from '../data.service';
 
 @Component({
   selector: 'app-stamm',
@@ -9,7 +10,26 @@ import { ThrowStmt } from '@angular/compiler';
 })
 export class StammComponent implements OnInit {
 
-
+  getCookie(name) {
+    var dc = document.cookie;
+    var prefix = name + "=";
+    var begin = dc.indexOf("; " + prefix);
+    if (begin == -1) {
+        begin = dc.indexOf(prefix);
+        if (begin != 0) return null;
+    }
+    else
+    {
+        begin += 2;
+        var end = document.cookie.indexOf(";", begin);
+        if (end == -1) {
+        end = dc.length;
+        }
+    }
+    // because unescape has been deprecated, replaced with decodeURI
+    //return unescape(dc.substring(begin + prefix.length, end));
+    return decodeURI(dc.substring(begin + prefix.length, end));
+  } 
 
   data = []
 
@@ -21,21 +41,28 @@ export class StammComponent implements OnInit {
   beschreibung=""
 
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient,  private _data: DataService) { 
     this.getInfo();
-    this.getPosts();
+
+    this._data.cuurrentPersonalPosts.subscribe(posts => {
+      console.log(posts)
+      this.data = posts
+    })
+
+    //this.getPosts();
+
+
   }
 
   getInfo(){
-    //Hier muss die Stammes-Id der Session rein
-    this.http.get('http://localhost:3000/staemme/5fc7721870652d1f4c5f8bc6').toPromise().then(
+    this.http.get('http://localhost:3000/staemme/' + this.getCookie("session_id")).toPromise().then(
 
       data => this.addInfo(data)
     );
   }
 
   addInfo(newData){
-    console.log(newData)
+    
     this.stammesvorstand = newData.ansprechpartner;
     this.ort = newData.ort;
     this.telefon = newData.telefon;
@@ -48,8 +75,8 @@ export class StammComponent implements OnInit {
   }
 
   getPosts(){
-    //Hier muss Abfrage der Posts abhängig von der session-stammnummer
-    this.http.get('http://localhost:3000/posts').toPromise().then(
+    
+    this.http.get('http://localhost:3000/posts/').toPromise().then(
 
       
       data => {

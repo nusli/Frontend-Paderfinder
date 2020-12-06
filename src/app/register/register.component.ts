@@ -59,7 +59,7 @@ export class RegisterComponent implements OnInit {
           if (response.status == 400) {
             // something went wrong -> notify user
             // E11000 --> doppelter stamm name
-            console.log("something went wrong")
+            
           }
           this.myVar = true;
           return response.text();

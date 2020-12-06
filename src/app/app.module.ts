@@ -65,6 +65,9 @@ import { SucheComponent } from './suche/suche.component';
 
 import { HttpClientModule } from '@angular/common/http';
 
+import {DataService} from '../app/data.service'
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -132,7 +135,7 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [DataService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

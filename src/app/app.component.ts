@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import {Router} from '@angular/router';
+import {DataService} from '../app/data.service';
+
 
 function getCookie(name) {
   var dc = document.cookie;
@@ -29,12 +32,38 @@ function getCookie(name) {
 export class AppComponent {
   title = 'Paderfinder';
   value = 'Clear me';
+  loggedIn = false;
+  logged ;
+ 
 
+  constructor(private route:Router, private _data: DataService){
+
+    
+  }
+
+  ngOnInit(){
+    this._data.currentLogged.subscribe(logged => {
+      if(logged == "eingeloggt"){
+        
+        this.loggedIn = true;
+      }else{
+        
+        this.loggedIn = false;
+      }
+    })
+  }
+
+
+  cookie = getCookie("session_id")
+
+  login() : void {
+    this._data.loggedIn();
+  }
  
   logout(): void {
     // check if user session exists
     if (getCookie("session_id") === null) {
-      console.log("no user to logout");
+      
       return;
     }
     // TODO get url dynamically
@@ -50,8 +79,10 @@ export class AppComponent {
       return response.text() 
     })
     .then (data => {
-      console.log(document.cookie)
-      console.log(data)
+      this._data.loggedIn();
+      this.route.navigate(['/login']);
+      
+     
     })
     .catch((error) => {
       console.error('Error:', error);

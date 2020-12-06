@@ -14,7 +14,8 @@ import { SucheComponent } from './suche/suche.component';
 
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },                 //2  
+  { path: '', component: HomeComponent },  
+  
   { path: 'stamm', component: StammComponent },  
   { path: 'impressum', component: ImpressumComponent },  
   { path: 'policies', component: PoliciesComponent },  

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {DataService} from '../data.service';
 
 import { fromEventPattern } from 'rxjs';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
@@ -12,125 +13,61 @@ import { title } from 'process';
 })
 export class HomeComponent implements OnInit {
 
-  
+  data = []
 
-  data = [
-    
-  ]
-
-  constructor(private http: HttpClient) { 
-    this.getPosts();
-
-    console.log("Aktueller Cookie: " + this.getCookie("session_id"))
-    /*
-    this.input.addEventListener('change', function(e){
-      console.log(this.input.files)
-    }, false)
-    */
-    //console.log(this.getCookie("session_id"))
-  }
-
-  getPosts(){
-    
-    this.http.get('http://localhost:3000/posts').toPromise().then(
-
-      data => this.addData(data)
-    );
-    
-    
-  }
-
+  stammname;
 
   titel="";
-  stammid="";
+  stamm_id="";
   art="";
   inhalt="";
   bild;
   fileEnding = "jpg";
-  
 
-  onSelectedFile(event){
-    if(event.target.files.length > 0 ){
-      const file = event.target.files[0];
-      console.log(file);
-
-
-    }
+  constructor(private http: HttpClient, private _data: DataService) { 
+    _data.getAllPosts();
   }
 
   newPost(){
     
     var postData = {
       titel: this.titel,
-      //Hier kommt id der session
-      stammid : "5fc6045785e1b12f3ce8a4ca",
+      stamm_name: this.stammname,
+      stamm_id : this.stamm_id,
       art: this.art,
       inhalt : this.inhalt,
       image: this.bild,
       fileEnding: this.fileEnding,
       } 
 
-    console.log(postData)
     
-    this.http.post('http://localhost:3000/posts',postData).toPromise().then(
-      data => console.log(postData)
-    ).then(data => this.getPosts())
+    
+    this.http.post('http://localhost:3000/posts',postData).toPromise().then(data => this._data.getAllPosts())
     
   }
   
-
-  addData(newdata){
-    this.data = [];
-     newdata.forEach(element => {
-      var post = {
-        //Hier jeweilig angemeldeten usernamen
-        user: "DPSG Heilige Maria",
-        content: element.inhalt,
-        title: element.titel,
-        typ: "News",
-        publish_date : element.änderungsdatum,
-        //Hier muss das ausgewählte bild hin 
-        bild: "https://pfadfinder-meschede.de/wp-content/uploads/2018/10/Schweden.jpg"
-      }
-      
-      this.data.push(post)
-      
-    });
-    this.data.reverse();
-  }
-
   ngOnInit(): void {
+    this._data.currentAllPosts.subscribe(posts => {
+      this.data = posts;
+    });
+
+    this._data.cookieLogged.subscribe(id => {
+      this.stamm_id = id;
+    })
+
+    this._data.currentStammName.subscribe(name => {
+      this.stammname = name;
+    })
+
   }
-
-
+    
   //FilePicker
   onFileChanged(event) {
     const file = event.target.files[0]
-  
-      console.log(file);
+
 
       this.bild = file;
   }
 
-  getCookie(name) {
-    var dc = document.cookie;
-    var prefix = name + "=";
-    var begin = dc.indexOf("; " + prefix);
-    if (begin == -1) {
-        begin = dc.indexOf(prefix);
-        if (begin != 0) return null;
-    }
-    else
-    {
-        begin += 2;
-        var end = document.cookie.indexOf(";", begin);
-        if (end == -1) {
-        end = dc.length;
-        }
-    }
-    // because unescape has been deprecated, replaced with decodeURI
-    //return unescape(dc.substring(begin + prefix.length, end));
-    return decodeURI(dc.substring(begin + prefix.length, end));
-  }
 
 }

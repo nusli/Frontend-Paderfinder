@@ -7,15 +7,15 @@
       <ul>
     
         <li><a href="#" routerLink="/">Feed</a></li>
-        <li><a href="#" routerLink="/stamm">Mein Stamm</a></li>
+        <li><a href="#" routerLink="/stamm" *ngIf="loggedIn">Mein Stamm</a></li>
         <li><a href="#" routerLink="/about">About</a></li>
         <li><a href="#" routerLink="/policies">Regeln</a></li>
         <li><a href="#" routerLink="/impressum">Impressum</a></li>
         
         
-        <li><a href="#" routerLink="/login">Log In</a></li>
+        <li><a href="#" routerLink="/login" (click)="login()" *ngIf="!loggedIn">Log In</a></li>
         
-        <li><a href="#" routerLink="/login" (click)="logout()">Log Out</a></li>
+        <li><a href="#" routerLink="/login" (click)="logout()" *ngIf="loggedIn">Log Out</a></li>
         
       </ul>
     </nav>

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import {DataService} from '../data.service'
+
 
 @Component({
   selector: 'app-login',
@@ -8,14 +10,22 @@ import { Component, OnInit } from '@angular/core';
 export class LoginComponent implements OnInit {
 
   hide = true;
+ 
 
-  constructor() { }
+  constructor(private _data: DataService) {
+    
 
-  ngOnInit(): void {
+   }
+
+   ngOnInit(){
+   
   }
 
   benutzerName = "";
   passwort = "";
+  
+
+  
 
   submitLogin(): void {
     if (this.benutzerName == "") {
@@ -50,8 +60,9 @@ export class LoginComponent implements OnInit {
         return response.text() 
       })
       .then (data => {
-        console.log("Document.cookie repsonse: " + document.cookie)
-        console.log("Data response: " + data)
+        this._data.loggedIn();
+        this._data.getStamm();
+        this._data.getStammName();
       })
       .catch((error) => {
         console.error('Error:', error);
