@@ -50,8 +50,8 @@ export class LoginComponent implements OnInit {
         return response.text() 
       })
       .then (data => {
-        console.log(document.cookie)
-        console.log(data)
+        console.log("Document.cookie repsonse: " + document.cookie)
+        console.log("Data response: " + data)
       })
       .catch((error) => {
         console.error('Error:', error);

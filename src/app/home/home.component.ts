@@ -20,6 +20,14 @@ export class HomeComponent implements OnInit {
 
   constructor(private http: HttpClient) { 
     this.getPosts();
+
+    console.log("Aktueller Cookie: " + this.getCookie("session_id"))
+    /*
+    this.input.addEventListener('change', function(e){
+      console.log(this.input.files)
+    }, false)
+    */
+    //console.log(this.getCookie("session_id"))
   }
 
   getPosts(){
@@ -37,16 +45,32 @@ export class HomeComponent implements OnInit {
   stammid="";
   art="";
   inhalt="";
+  bild;
+  fileEnding = "jpg";
+  
+
+  onSelectedFile(event){
+    if(event.target.files.length > 0 ){
+      const file = event.target.files[0];
+      console.log(file);
+
+
+    }
+  }
 
   newPost(){
+    
     var postData = {
       titel: this.titel,
       //Hier kommt id der session
       stammid : "5fc6045785e1b12f3ce8a4ca",
       art: this.art,
-      inhalt : this.inhalt
+      inhalt : this.inhalt,
+      image: this.bild,
+      fileEnding: this.fileEnding,
       } 
 
+    console.log(postData)
     
     this.http.post('http://localhost:3000/posts',postData).toPromise().then(
       data => console.log(postData)
@@ -82,6 +106,31 @@ export class HomeComponent implements OnInit {
   //FilePicker
   onFileChanged(event) {
     const file = event.target.files[0]
+  
+      console.log(file);
+
+      this.bild = file;
+  }
+
+  getCookie(name) {
+    var dc = document.cookie;
+    var prefix = name + "=";
+    var begin = dc.indexOf("; " + prefix);
+    if (begin == -1) {
+        begin = dc.indexOf(prefix);
+        if (begin != 0) return null;
+    }
+    else
+    {
+        begin += 2;
+        var end = document.cookie.indexOf(";", begin);
+        if (end == -1) {
+        end = dc.length;
+        }
+    }
+    // because unescape has been deprecated, replaced with decodeURI
+    //return unescape(dc.substring(begin + prefix.length, end));
+    return decodeURI(dc.substring(begin + prefix.length, end));
   }
 
 }
