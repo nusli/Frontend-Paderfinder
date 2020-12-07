@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import {HttpClient} from '@angular/common/http';
+import { templateJitUrl } from '@angular/compiler';
 
 
 @Injectable()
@@ -16,7 +17,7 @@ export class DataService {
   currentAllPosts = this.allpostSource.asObservable();
 
   private personalpostSource = new BehaviorSubject<any>([]);
-  cuurrentPersonalPosts = this.personalpostSource.asObservable();
+  currentPersonalPosts = this.personalpostSource.asObservable();
 
   private stammSource = new BehaviorSubject<string>("");
   currentStammName = this.stammSource.asObservable();
@@ -55,11 +56,20 @@ export class DataService {
   }
 
   getPersonalPosts(){
-    this.http.get('http://localhost:3000/posts/'  + this.getCookie("session_id")).toPromise().then(
+    var url = 'http://localhost:3000/posts/'
+    
+    this.http.get(url).toPromise().then(
       
       data => {
+        var temp : any = data;
+        var personalPostsData = [];
+        for(var i =0; i < temp.length;i++){
+          if(temp[i].stamm_id == this.getCookie("session_id")){
+              personalPostsData.push(temp[i])
+          }
+        }
         
-        this.personalpostSource.next(this.addData(data));
+        this.personalpostSource.next(this.addData(personalPostsData));
       }
     );
   }

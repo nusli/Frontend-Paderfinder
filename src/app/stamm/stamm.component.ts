@@ -44,10 +44,7 @@ export class StammComponent implements OnInit {
   constructor(private http: HttpClient,  private _data: DataService) { 
     this.getInfo();
 
-    this._data.cuurrentPersonalPosts.subscribe(posts => {
-      console.log(posts)
-      this.data = posts
-    })
+    _data.getPersonalPosts();
 
     //this.getPosts();
 
@@ -56,8 +53,12 @@ export class StammComponent implements OnInit {
 
   getInfo(){
     this.http.get('http://localhost:3000/staemme/' + this.getCookie("session_id")).toPromise().then(
-
-      data => this.addInfo(data)
+      
+      
+      data => {
+        console.log(data)
+        this.addInfo(data)}
+      
     );
   }
 
@@ -72,6 +73,11 @@ export class StammComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this._data.currentPersonalPosts.subscribe(posts => {
+      console.log(posts)
+      this.data = posts
+    })
   }
 
   getPosts(){
