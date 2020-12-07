@@ -51,7 +51,9 @@ export class HomeComponent implements OnInit {
 
   onSelectedFile(event){
     if(event.target.files.length > 0 ){
+      // file notwendig?
       const file = event.target.files[0];
+      this.bild = file;
       console.log(file);
 
 
@@ -59,24 +61,30 @@ export class HomeComponent implements OnInit {
   }
 
   newPost(){
-    
+    var formData = new FormData();
+    formData.append("stamm_id", this.stammid)
+    formData.append("titel", this.titel)
+    formData.append("inhalt", this.inhalt)
+    formData.append("tags", this.art)
+    formData.append("image", this.bild)
+/*
     var postData = {
       titel: this.titel,
       //Hier kommt id der session
-      stammid : "5fc6045785e1b12f3ce8a4ca",
+      stamm_id : "5fc6045785e1b12f3ce8a4ca",
       art: this.art,
       inhalt : this.inhalt,
       image: this.bild,
       fileEnding: this.fileEnding,
-      } 
+      } */
 
-    console.log(postData)
+    console.log(formData.get("image"))
     
-    this.http.post('http://localhost:3000/posts',postData).toPromise().then(
-      data => console.log(postData)
+    this.http.post('http://localhost:3000/posts',formData).toPromise().then(
+      data => console.log(formData)
     ).then(data => this.getPosts())
     .catch(err => {
-      return console.log(postData);
+      return console.log(err);
     })
     
   }
