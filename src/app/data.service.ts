@@ -69,7 +69,8 @@ export class DataService {
           }
         }
         
-        this.personalpostSource.next(this.addData(personalPostsData));
+        this.personalpostSource.next(this.addData(personalPostsData ));
+       
       }
     );
   }
@@ -98,8 +99,25 @@ export class DataService {
   addData(newdata){
     var data = [];
      
-     newdata.forEach(element => {
+     newdata.forEach(async element => {
       
+      /*
+      var linus = await fetch('http://localhost:3000/images/' + element.titel, {
+        method: "get",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+      }).then( data =>{
+        console.log(data.json())
+        console.log(data.text())
+      }
+      )
+
+    */
+       
+
       var post = {   
         user: element.stamm_name,
         content: element.inhalt,
@@ -107,7 +125,8 @@ export class DataService {
         typ: "News",
         publish_date : element.änderungsdatum,
         //Hier muss das ausgewählte bild hin 
-        bild: "https://pfadfinder-meschede.de/wp-content/uploads/2018/10/Schweden.jpg"
+        //bild: linus. ,
+        bild : "https://pfadfinder-meschede.de/wp-content/uploads/2018/10/Schweden.jpg"
       }
       
       data.push(post)
@@ -116,6 +135,9 @@ export class DataService {
     data.reverse();
     return data;
   }
+  
+
+
 
   loggedIn(){
     if(this.getCookie("session_id") === null){

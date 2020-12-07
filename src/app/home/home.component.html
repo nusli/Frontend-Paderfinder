@@ -47,6 +47,11 @@
         </mat-card-actions>
     </mat-card>
 
+ <div>
+  <img mat-card-image src={{bildladen}} alt="test">
+ </div>
+
+
     <h1 style="padding-top: 30px;">Globaler Newsfeed</h1>
  <li *ngFor="let content of data">
     <mat-card  class="card">
@@ -55,7 +60,7 @@
         <mat-card-title>{{content.title}}</mat-card-title>
         <mat-card-subtitle>{{content.user}}</mat-card-subtitle>
         </mat-card-header>
-         <img mat-card-image src={{content.bild}} alt="Photo of a Shiba Inu"> 
+         <img mat-card-image src={{content.bild}}> 
         <mat-card-content>
         <p>{{content.content}}</p>
         </mat-card-content>

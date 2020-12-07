@@ -25,9 +25,28 @@ export class HomeComponent implements OnInit {
   fileEnding = "jpg";
 
   constructor(private http: HttpClient, private _data: DataService) { 
+
+    fetch('http://localhost:3000/images/qwer', 
+      {method: "get",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+        },
+    credentials: 'include' } ).then(
+
+      data => data.json() 
+    ).then( data => {
+      this.bildladen = data.file
+      console.log("test")
+    });
+
+
     _data.getAllPosts();
   }
 
+  bildladen;
+
+  /*
   newPost(){
     
     var postData = {
@@ -43,6 +62,23 @@ export class HomeComponent implements OnInit {
     
     
     this.http.post('http://localhost:3000/posts',postData).toPromise().then(data => this._data.getAllPosts())
+    
+  }
+
+  */
+  newPost(){
+    var formData = new FormData();
+    formData.append("stamm_id", this.stamm_id)
+    formData.append("stamm_name", this.stammname)
+    formData.append("titel", this.titel)
+    formData.append("inhalt", this.inhalt)
+    formData.append("art", this.art)
+    formData.append("profile_pic", this.bild)
+
+    console.log(formData.get("art"))
+    console.log(formData.get("profile_pic"))
+    
+    this.http.post('http://localhost:3000/upload',formData).toPromise().then(data => this._data.getAllPosts())
     
   }
   
