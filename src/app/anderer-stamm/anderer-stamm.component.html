@@ -23,8 +23,6 @@
             <p >Beschreibung : {{beschreibung}}</p>
         </mat-card-content>
         <mat-card-actions>
-            <button mat-button href="#" routerLink="/changeStamm">Ändere Informationen</button>
-            
         </mat-card-actions>
     </mat-card>  
     </li>
@@ -42,12 +40,11 @@
             <mat-card-content>
             <p>{{content.content}}</p>
             </mat-card-content>
-            <mat-card-actions>
-  
-            <button mat-button (click)="delete(content.post_id)">DELETE</button>
+            <mat-card-actions>           
             </mat-card-actions>
         </mat-card>
       </li>
     </ul>
     
     </div>
+

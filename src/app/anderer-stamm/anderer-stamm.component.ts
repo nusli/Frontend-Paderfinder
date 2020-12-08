@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { ThrowStmt } from '@angular/compiler';
 import {DataService} from '../data.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
-  selector: 'app-stamm',
-  templateUrl: './stamm.component.html',
-  styleUrls: ['./stamm.component.scss']
+  selector: 'app-anderer-stamm',
+  templateUrl: './anderer-stamm.component.html',
+  styleUrls: ['./anderer-stamm.component.scss']
 })
-export class StammComponent implements OnInit {
+export class AndererStammComponent implements OnInit {
 
   getCookie(name) {
     var dc = document.cookie;
@@ -42,8 +43,8 @@ export class StammComponent implements OnInit {
   beschreibung=""
 
 
-  constructor(private http: HttpClient,  private _data: DataService) { 
-    this.getInfo();
+  constructor(private http: HttpClient,  private _data: DataService, private route: ActivatedRoute) { 
+    
 
     _data.getPersonalPosts();
 
@@ -52,8 +53,8 @@ export class StammComponent implements OnInit {
 
   }
 
-  getInfo(){
-    this.http.get('http://localhost:3000/staemme/' + this.getCookie("session_id")).toPromise().then(
+  getInfo(id){
+    this.http.get('http://localhost:3000/staemme/' + id).toPromise().then(
       
       
       data => {
@@ -76,22 +77,16 @@ export class StammComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this._data.currentPersonalPosts.subscribe(posts => {
+    console.log(this.route.snapshot.paramMap.get('id'))
+    this.getInfo(this.route.snapshot.paramMap.get('id'))
+
+    this._data.getStammPosts(this.route.snapshot.paramMap.get('id'));
+
+    this._data.currentStammPosts.subscribe(posts => {
       console.log(posts)
       this.data = posts
     })
   }
-
-  delete(post_id){
-    this.http.delete('http://localhost:3000/posts/' + post_id).toPromise().then(
-      
-      
-      data => {
-        console.log(data)
-        this._data.getPersonalPosts();
-      }
-    );
-  }
-  
 }
+
 

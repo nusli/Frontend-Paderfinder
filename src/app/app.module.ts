@@ -65,7 +65,8 @@ import { SucheComponent } from './suche/suche.component';
 
 import { HttpClientModule } from '@angular/common/http';
 
-import {DataService} from '../app/data.service'
+import {DataService} from '../app/data.service';
+import { AndererStammComponent } from './anderer-stamm/anderer-stamm.component'
 
 
 @NgModule({
@@ -79,7 +80,8 @@ import {DataService} from '../app/data.service'
     ImpressumComponent,
     PoliciesComponent,
     ChangeStammComponent,
-    SucheComponent
+    SucheComponent,
+    AndererStammComponent
   ],
   imports: [
     BrowserModule,

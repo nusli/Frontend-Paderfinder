@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {DataService} from '../data.service'
-
+import {Router} from '@angular/router'
 
 @Component({
   selector: 'app-login',
@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
   hide = true;
  
 
-  constructor(private _data: DataService) {
+  constructor(private _data: DataService, private router: Router) {
     
 
    }
@@ -60,12 +60,18 @@ export class LoginComponent implements OnInit {
         return response.text() 
       })
       .then (data => {
+        if(data == "Unauthorized"){
+          alert("Ungültige Kombination aus Stammname und Passwort")
+        }else{
+        
         this._data.loggedIn();
         this._data.getStamm();
         this._data.getStammName();
+        this.router.navigate(['/'])
+        }
       })
       .catch((error) => {
-        console.error('Error:', error);
+        console.error('Error Happend:', error);
       }); 
 
     

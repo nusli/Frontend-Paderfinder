@@ -1,0 +1,32 @@
+.card {
+    max-width: 400px;
+    
+    
+    border-color: green;
+    border: 2px solid  rgb(23, 194, 88)
+  }
+  
+  .example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+  }
+
+  ul {
+    list-style-type: none;
+    li {
+        background: rgb(238, 238, 238);
+        padding: 1em;
+        margin-right: 10px;
+        max-width: 400px;
+        margin-bottom: 1em;
+        display: flex;
+        flex-direction: column;
+    }
+}   
+.all{
+    text-align: center;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

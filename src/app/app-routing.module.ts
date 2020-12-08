@@ -11,6 +11,7 @@ import { PoliciesComponent } from './policies/policies.component';
 import { AboutComponent } from './about/about.component';
 import { ChangeStammComponent } from './change-stamm/change-stamm.component';
 import { SucheComponent } from './suche/suche.component';
+import { AndererStammComponent } from './anderer-stamm/anderer-stamm.component';
 
 
 const routes: Routes = [
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },        
   { path: 'changeStamm', component: ChangeStammComponent },    
   { path: 'suche', component: SucheComponent },  
+  { path: 'andererStamm/:id', component: AndererStammComponent },  
 ];
 
 @NgModule({

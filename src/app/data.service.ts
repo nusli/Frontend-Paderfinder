@@ -22,6 +22,9 @@ export class DataService {
   private stammSource = new BehaviorSubject<string>("");
   currentStammName = this.stammSource.asObservable();
 
+  private singlestammpostSource = new BehaviorSubject<any>([]);
+  currentStammPosts = this.singlestammpostSource.asObservable();
+
   constructor(private http: HttpClient) { }
 
   getCookie(name):string {
@@ -75,6 +78,26 @@ export class DataService {
     );
   }
 
+  getStammPosts(id){
+    var url = 'http://localhost:3000/posts/'
+    
+    this.http.get(url).toPromise().then(
+      
+      data => {
+        var temp : any = data;
+        var stammPostsData = [];
+        for(var i =0; i < temp.length;i++){
+          if(temp[i].stamm_id == id){
+              stammPostsData.push(temp[i])
+          }
+        }
+        
+        this.singlestammpostSource.next(this.addData(stammPostsData ));
+       
+      }
+    );
+  }
+
   getStammName(){
     this.http.get('http://localhost:3000/staemme/' + this.getCookie("session_id")).toPromise().then(
       
@@ -116,17 +139,19 @@ export class DataService {
       )
 
     */
-       
+       console.log(element)
 
       var post = {   
+        post_id : element._id,
         user: element.stamm_name,
+        stamm_id : element.stamm_id,
         content: element.inhalt,
         title: element.titel,
         typ: "News",
         publish_date : element.änderungsdatum,
         //Hier muss das ausgewählte bild hin 
         //bild: linus. ,
-        bild : "https://pfadfinder-meschede.de/wp-content/uploads/2018/10/Schweden.jpg"
+        bild : 'http://localhost:3000/' + element.titel + '.png'
       }
       
       data.push(post)

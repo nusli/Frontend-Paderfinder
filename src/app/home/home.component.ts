@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {DataService} from '../data.service';
+import {Router} from '@angular/router'
 
 import { fromEventPattern } from 'rxjs';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
@@ -24,15 +25,12 @@ export class HomeComponent implements OnInit {
   bild;
   fileEnding = "jpg";
 
-  constructor(private http: HttpClient, private _data: DataService) { 
-
-    this.bildladen = 'http://localhost:3000/Example.jpg'
-
+  constructor(private http: HttpClient, private _data: DataService, private router: Router) { 
 
     _data.getAllPosts();
   }
 
-  bildladen;
+  
 
   /*
   newPost(){
@@ -93,5 +91,8 @@ export class HomeComponent implements OnInit {
       this.bild = file;
   }
 
+  onSelect(id){
+    this.router.navigate(['/andererStamm', id])
+  }
 
 }
